@@ -5,8 +5,8 @@ import PostList from './Components/PostList';
 import MoreButton from './Components/MoreButton';
 
 class App extends Component {
-  constructor(props){
-      super(props);
+  constructor(){
+      super();
       this.state = {
           shownPosts: 10,
       };
@@ -14,16 +14,16 @@ class App extends Component {
   }
 
   updateShownPosts = (value) => {
-    this.setState({ shownPosts: this.state.shownPosts + value })
+      this.setState({ shownPosts: this.state.shownPosts + value })
   };
 
   render() {
-    return (
-      <div className="App">
-        <PostList data={data} shownPosts={this.state.shownPosts} />
-        <MoreButton data={data} updateShownPosts={this.updateShownPosts} />
-      </div>
-    );
+      return (
+          <React.Fragment>
+              <PostList data={data} shownPosts={this.state.shownPosts} />
+              <MoreButton data={data} updateShownPosts={this.updateShownPosts} />
+          </React.Fragment>
+      );
   }
 }
 
