@@ -9,6 +9,7 @@ class App extends Component {
       super();
       this.state = {
           shownPosts: 10,
+          showOnClick: 10
       };
       this.updateShownPosts = this.updateShownPosts.bind(this)
   }
@@ -21,7 +22,7 @@ class App extends Component {
       return (
           <React.Fragment>
               <PostList data={data} shownPosts={this.state.shownPosts} />
-              <MoreButton data={data} updateShownPosts={this.updateShownPosts} />
+              <MoreButton showOnClick={this.state.showOnClick} updateShownPosts={this.updateShownPosts} />
           </React.Fragment>
       );
   }

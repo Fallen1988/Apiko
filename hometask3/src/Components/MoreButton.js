@@ -7,7 +7,7 @@ class MoreButton extends Component {
     }
 
     showMorePosts(){
-        this.props.updateShownPosts(10)
+        this.props.updateShownPosts(this.props.showOnClick)
     }
 
     render() {
