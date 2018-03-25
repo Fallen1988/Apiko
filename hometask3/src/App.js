@@ -15,14 +15,18 @@ class App extends Component {
   }
 
   updateShownPosts = (value) => {
-      this.setState({ shownPosts: this.state.shownPosts + value })
+      this.setState(prevState => ({
+          shownPosts: prevState.shownPosts + value
+      }))
   };
 
   render() {
       return (
           <React.Fragment>
-              <PostList data={data} shownPosts={this.state.shownPosts} />
-              <MoreButton showOnClick={this.state.showOnClick} updateShownPosts={this.updateShownPosts} />
+              <PostList data={data}
+                        shownPosts={this.state.shownPosts} />
+              <MoreButton showOnClick={this.state.showOnClick}
+                          updateShownPosts={this.updateShownPosts} />
           </React.Fragment>
       );
   }
