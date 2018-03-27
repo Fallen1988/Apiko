@@ -3,15 +3,15 @@ import PostListItem from './PostListItem';
 
 class PostList extends Component {
     render() {
-        const list = this.props.data;
+        const data = this.props.data;
+        const listToShow = data.slice(0, this.props.shownPosts);
         return (
             <React.Fragment>
-                {list.map(( item, index) => {
-                    if (index >= this.props.shownPosts) return '';
-                    return (
-                        <PostListItem data={item} key={item.id} />
-                     );
-                })}
+            {listToShow.map( li => {
+                return (
+                    <PostListItem data={li} key={li.id} />
+                );
+            })}
             </React.Fragment>
         )
     }

@@ -9,15 +9,15 @@ class App extends Component {
       super();
       this.state = {
           shownPosts: 10,
-          showOnClick: 10
+          showOnClick: 10,
       };
       this.updateShownPosts = this.updateShownPosts.bind(this)
   }
 
   updateShownPosts = (value) => {
-      this.setState(prevState => ({
-          shownPosts: prevState.shownPosts + value
-      }))
+      this.setState({
+          shownPosts: this.state.shownPosts + value,
+      })
   };
 
   render() {
