@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 
 class MoreButton extends Component {
-    constructor(props) {
-        super(props);
-        this.showMorePosts = this.showMorePosts.bind(this);
-    }
-
-    showMorePosts(){
+    showMorePosts = () => {
         this.props.updateShownPosts(this.props.showOnClick)
-    }
+    };
 
     render() {
         return (

@@ -7,9 +7,9 @@ class PostList extends Component {
         const listToShow = data.slice(0, this.props.shownPosts);
         return (
             <React.Fragment>
-            {listToShow.map( li => {
+            {listToShow.map( post => {
                 return (
-                    <PostListItem data={li} key={li.id} />
+                    <PostListItem data={post} key={post.id} />
                 );
             })}
             </React.Fragment>
