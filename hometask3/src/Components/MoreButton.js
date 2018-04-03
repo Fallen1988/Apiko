@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 class MoreButton extends Component {
     showMorePosts = () => {
-        this.props.updateShownPosts(this.props.showOnClick)
+        const { updateShownPosts, showOnClick } = this.props;
+        updateShownPosts(showOnClick);
     };
 
     render() {

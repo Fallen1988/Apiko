@@ -1,21 +1,48 @@
 import React, { Component } from 'react';
 import './App.css';
-import data from './data';
 import PostList from './Components/PostList';
 import MoreButton from './Components/MoreButton';
 import SearchInput from './Components/SearchInput';
-import ErrorMessage from './Components/ErrorMessage'
+import ErrorMessage from './Components/ErrorMessage';
+
+const API = "https://jsonplaceholder.typicode.com/";
+const fetchData = entity =>
+    fetch(API + entity).then(response => response.json());
 
 class App extends Component {
-  constructor(){
-      super();
+  constructor(props){
+      super(props);
       this.state = {
           shownPosts: 10,
           showOnClick: 10,
-          dataToRender: data,
+          posts: [],
+          postsToRender: [],
+          isLoading: true,
       };
       this.updateShownPosts = this.updateShownPosts.bind(this);
       this.updateSearchList = this.updateSearchList.bind(this);
+      this.firstData = this.firstData.bind(this);
+  }
+
+  componentDidMount() {
+      this.timerId = setInterval(() => {
+          this.fetchingData();
+      }, 5000);
+  }
+
+  componentWillUnmount() {
+      clearInterval(this.timerId);
+  }
+
+  fetchingData() {
+      Promise.all([fetchData("posts")]).then(
+          ([posts]) => {
+              this.setState({
+                  posts,
+                  isLoading: false,
+              });
+          }
+      );
   }
 
   updateShownPosts(value) {
@@ -26,26 +53,37 @@ class App extends Component {
 
   updateSearchList(list) {
       this.setState({
-          dataToRender: list,
+          postsToRender: list,
           shownPosts: 10,
       })
   };
 
+  firstData() {
+      return this.setState({
+          postsToRender: this.state.posts
+      })
+  };
+
   render() {
-      const list = this.state.dataToRender;
-      const noItems = list.length > 0 ? false : true;
+      const { shownPosts, showOnClick, posts, postsToRender, isLoading } = this.state;
+      const noItems = postsToRender.length > 0 ? false : true;
+      if (isLoading) {
+          return <h3>Loading...</h3>
+      }
+
       return (
           <React.Fragment>
               <SearchInput
-                  data={data}
+                  data={posts}
                   updateSearchList={this.updateSearchList}/>
               {noItems && <ErrorMessage />}
               <PostList
-                  data={this.state.dataToRender}
-                  shownPosts={this.state.shownPosts} />
-              {!noItems && list.length > this.state.showOnClick &&
+                  data={postsToRender}
+                  posts={this.firstData}
+                  shownPosts={shownPosts} />
+              {!noItems && postsToRender.length > showOnClick &&
                   <MoreButton
-                      showOnClick={this.state.showOnClick}
+                      showOnClick={showOnClick}
                       updateShownPosts={this.updateShownPosts} />}
           </React.Fragment>
       );
@@ -53,4 +91,3 @@ class App extends Component {
 }
 
 export default App;
-

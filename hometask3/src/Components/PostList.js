@@ -2,9 +2,13 @@ import React, {Component} from 'react';
 import PostListItem from './PostListItem';
 
 class PostList extends Component {
+    componentDidMount() {
+        this.props.posts();
+    }
+
     render() {
-        const data = this.props.data;
-        const listToShow = data.slice(0, this.props.shownPosts);
+        const { data, shownPosts } = this.props;
+        const listToShow = data.slice(0, shownPosts);
         return (
             <React.Fragment>
             {listToShow.map( post => {
