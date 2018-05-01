@@ -13,7 +13,7 @@ class PostList extends Component {
             <React.Fragment>
             {listToShow.map( post => {
                 return (
-                    <PostListItem data={post} key={post.id} />
+                    <PostListItem body={post.body} title={post.title} key={post.id} />
                 );
             })}
             </React.Fragment>

@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 
 class PostListItem extends Component {
     shouldComponentUpdate(nextProps, nextState) {
-        const {title, body} = this.props.data;
+        const {title, body} = this.props;
         return (
-            title !== nextProps.data.title ||
-            body !== nextProps.data.body
+            title !== nextProps.title ||
+            body !== nextProps.body
         );
     }
 
     render() {
-        const data = this.props.data;
+        const {title, body} = this.props;
         return (
             <li className="App-post">
-                <h3>{data.title}</h3>
-                <p>{data.body}</p>
+                <h3>{title}</h3>
+                <p>{body}</p>
             </li>
         )
     }
