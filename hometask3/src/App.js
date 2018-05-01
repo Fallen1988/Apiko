@@ -4,6 +4,8 @@ import PostList from './Components/PostList';
 import MoreButton from './Components/MoreButton';
 import SearchInput from './Components/SearchInput';
 import ErrorMessage from './Components/ErrorMessage';
+const showOnClick = 10;
+const SHOW_POSTS = 10;
 
 const API = "https://jsonplaceholder.typicode.com/";
 const fetchData = entity =>
@@ -13,8 +15,7 @@ class App extends Component {
   constructor(props){
       super(props);
       this.state = {
-          shownPosts: 10,
-          showOnClick: 10,
+          shownPosts: SHOW_POSTS,
           posts: [],
           postsToRender: [],
           isLoading: true,
@@ -65,7 +66,7 @@ class App extends Component {
   };
 
   render() {
-      const { shownPosts, showOnClick, posts, postsToRender, isLoading } = this.state;
+      const { shownPosts, posts, postsToRender, isLoading } = this.state;
       const noItems = postsToRender.length > 0 ? false : true;
       if (isLoading) {
           return <h3>Loading...</h3>
