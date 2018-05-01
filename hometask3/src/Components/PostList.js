@@ -10,13 +10,13 @@ class PostList extends Component {
         const { data, shownPosts } = this.props;
         const listToShow = data.slice(0, shownPosts);
         return (
-            <React.Fragment>
+            <ul>
             {listToShow.map( post => {
                 return (
                     <PostListItem body={post.body} title={post.title} key={post.id} />
                 );
             })}
-            </React.Fragment>
+            </ul>
         )
     }
 }
